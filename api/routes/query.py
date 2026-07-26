@@ -11,4 +11,4 @@ async def show_state(text: str = Query(...)):
         raise ValueError
 
     state = Predict.predict(text)
-    return text, state
+    return EmoResponse(text=text, state=state)
