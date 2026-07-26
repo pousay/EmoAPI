@@ -2,10 +2,10 @@ from fastapi import APIRouter, Query
 from core.model import Predict
 from schema import EmoResponse
 
-router = APIRouter(prefix="/emo")
+router = APIRouter()
 
 
-@router.get("/", response_model=EmoResponse)
+@router.get("/text", response_model=EmoResponse)
 async def show_state(text: str = Query(...)):
     if text.strip() == "":
         raise ValueError
