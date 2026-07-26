@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import config
+from routes import query_router
 
 app = FastAPI()
 app.add_middleware(
@@ -12,10 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get("/")
-async def test():
-    return "nice"
+app.include_router(query_router)
 
 
 if __name__ == "__main__":
