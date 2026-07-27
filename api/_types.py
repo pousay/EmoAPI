@@ -1,5 +1,5 @@
 from enum import StrEnum
-from types import Set
+from typing import Set
 
 class States(StrEnum):
     ANGRY    = "ANGRY"
