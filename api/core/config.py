@@ -10,6 +10,9 @@ class Config(BaseSettings):
     HOST: str
     DB_PATH: str
 
+    SECRET_KEY: str
+    ALGORITHM: str
+
     model_config = SettingsConfigDict(env_file=env_file)
 
 
