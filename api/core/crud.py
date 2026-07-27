@@ -21,9 +21,16 @@ class Crud:
         return db.query(User).offset(skip).limit(limit).all()
 
     @staticmethod
-    def create_user(db: Session, user: UserCreate):
+    def create_user(
+        db: Session, user: UserCreate, refresh_token: str, access_token: str
+    ):
         hashed_password = pwd_context.hash(user.password)
-        db_user = User(username=user.username, password=hashed_password)
+        db_user = User(
+            username=user.username,
+            password=hashed_password,
+            refresh_token=refresh_token,
+            access_token=access_token,
+        )
         db.add(db_user)
         db.commit()
         db.refresh(db_user)

@@ -20,7 +20,12 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered",
         )
-    return Crud.create_user(db=db, user=user)
+    access_token = create_access_token(data={"sub": db_user.username})
+    refresh_token = create_refresh_token(data={"sub": db_user.username})
+
+    return Crud.create_user(
+        db=db, user=user, refresh_token=refresh_token, access_token=access_token
+    )
 
 
 @router.post("/login", response_model=TokenResponse)
