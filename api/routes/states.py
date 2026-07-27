@@ -3,7 +3,7 @@ from schema import EmoResponse
 from typing import Set
 from _types import States
 
-router = APIRouter()
+router = APIRouter(tags=["STATES"])
 
 
 @router.get("/all_states", response_model=Set[str])

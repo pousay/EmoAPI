@@ -8,6 +8,13 @@ print("LOADING ENV FROM : ", env_file)
 class Config(BaseSettings):
     PORT: int
     HOST: str
+    DB_PATH: str
+
+    SECRET_KEY: str
+    ALGORITHM: str
+
+    REFRESH_TOKEN_EXPIRE_DAYS: int
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
     model_config = SettingsConfigDict(env_file=env_file)
 
