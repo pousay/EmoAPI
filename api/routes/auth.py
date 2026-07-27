@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from core.crud import Crud
+from core.crud import Crud, pwd_context
 from sqlalchemy.orm import Session
 from schema import TokenResponse, UserLogin, UserResponse, UserCreate
 from core.database import get_db
@@ -20,8 +20,8 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered",
         )
-    access_token = create_access_token(data={"sub": db_user.username})
-    refresh_token = create_refresh_token(data={"sub": db_user.username})
+    access_token = create_access_token(data={"sub": user.username})
+    refresh_token = create_refresh_token(data={"sub": user.username})
 
     return Crud.create_user(
         db=db, user=user, refresh_token=refresh_token, access_token=access_token
@@ -31,7 +31,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 @router.post("/login", response_model=TokenResponse)
 def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = Crud.get_user_by_username(db, username=user.username)
-    if not db_user or not Crud.pwd_context.verify(user.password, db_user.password):
+    if not db_user or not pwd_context.verify(user.password, db_user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
@@ -69,7 +69,6 @@ def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
     if db_user is None or db_user.refresh_token != refresh_token:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
 
-    # Generate new tokens
     new_access_token = create_access_token(data={"sub": username})
     new_refresh_token = create_refresh_token(data={"sub": username})
 
