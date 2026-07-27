@@ -3,7 +3,7 @@ from database.models import User
 from schema import UserCreate
 from passlib.context import CryptContext
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 
 class Crud:
