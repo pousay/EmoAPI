@@ -8,6 +8,7 @@ print("LOADING ENV FROM : ", env_file)
 class Config(BaseSettings):
     PORT: int
     HOST: str
+    DB_PATH: str
 
     model_config = SettingsConfigDict(env_file=env_file)
 
