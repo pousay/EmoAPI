@@ -27,3 +27,17 @@ class TokenResponse(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+
+
+#
+# EMO
+#
+
+
+class Emo(BaseModel):
+    text: str
+    state: Optional[str]
+
+
+class EmoResponse(Emo):
+    state: str
