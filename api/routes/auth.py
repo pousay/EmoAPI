@@ -7,11 +7,11 @@ from core.hash import create_access_token, create_refresh_token
 from core.config import config
 import jwt
 
-router = APIRouter(prefix="/auth")
+router = APIRouter(prefix="/auth", tags=["AUTH"])
 
 
 @router.post(
-    "/users/", response_model=UserResponse, status_code=status.HTTP_201_CREATED
+    "/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED
 )
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = Crud.get_user_by_username(db, username=user.username)
@@ -48,7 +48,7 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
-@router.post("/refresh/", response_model=TokenResponse)
+@router.post("/refresh", response_model=TokenResponse)
 def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
     try:
         payload = jwt.decode(

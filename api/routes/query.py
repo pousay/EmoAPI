@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from core.model import Predict
 from schema import EmoResponse
 
-router = APIRouter()
+router = APIRouter(tags=["EMO"])
 
 
 @router.get("/text", response_model=EmoResponse)

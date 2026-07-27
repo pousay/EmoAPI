@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import config
-from routes import query_router, states_router
+from routes import query_router, states_router, auth_router
 
 app = FastAPI()
 app.add_middleware(
@@ -15,7 +15,7 @@ app.add_middleware(
 
 app.include_router(query_router)
 app.include_router(states_router)
-
+app.include_router(auth_router)
 
 if __name__ == "__main__":
     uvicorn.run(
