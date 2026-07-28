@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, HTTPBasicCredentials
+from fastapi.security import HTTPBasic
 from core.crud import Crud, pwd_context
+from typing import Annotated
 from sqlalchemy.orm import Session
 from schema import TokenResponse, UserLogin, UserResponse, UserCreate
 from core.database import get_db
@@ -8,6 +10,7 @@ from core.config import config
 import jwt
 
 router = APIRouter(prefix="/auth", tags=["AUTH"])
+security = HTTPBasic()
 
 
 @router.post(
@@ -46,11 +49,14 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
 
 
 @router.get("/me", response_model=UserResponse)
-def read_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = Crud.get_user(db, user_id=user_id)
-    if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return db_user
+def read_user(
+    credentials: Annotated[HTTPBasicCredentials, Depends(security)],
+    db: Session = Depends(get_db),
+):
+    # db_user = Crud.get_user(db, user_id=user_id)
+    # if db_user is None:
+    #     raise HTTPException(status_code=404, detail="User not found")
+    # return db_user
 
 
 @router.post("/refresh", response_model=TokenResponse)
