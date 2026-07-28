@@ -50,14 +50,13 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
 
 @router.get("/me", response_model=UserResponse)
 def read_user(
-    credentials: Annotated[HTTPBasicCredentials, Depends(security)],
+    credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)],
     db: Session = Depends(get_db),
 ):
-    db_user = Crud.get_user_by_token(db, credentials)
-    # db_user = Crud.get_user(db, user_id=user_id)
-    # if db_user is None:
-    #     raise HTTPException(status_code=404, detail="User not found")
-    # return db_user
+    db_user = Crud.get_user_by_token(db, credentials.credentials)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
 
 
 @router.post("/refresh", response_model=TokenResponse)
