@@ -65,9 +65,10 @@ def read_user(
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
-    db_user = Crud.get_user_by_token(db, access_token)
-    if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+    db_user = Crud.get_user_by_username(db, username=username)
+    if db_user is None or db_user.access_token != access_token:
+        raise HTTPException(status_code=401, detail="Invalid refresh token")
+
     return db_user
 
 

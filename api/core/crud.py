@@ -13,14 +13,6 @@ class Crud:
         return db.query(User).filter(User.id == user_id).first()
 
     @staticmethod
-    def get_user_by_access_token(db: Session, token: str):
-        return db.query(User).filter(User.access_token == token).first()
-
-    @staticmethod
-    def get_user_by_refresh_token(db: Session, token: str):
-        return db.query(User).filter(User.refresh_token == token).first()
-
-    @staticmethod
     def get_user_by_username(db: Session, username: str):
         return db.query(User).filter(User.username == username).first()
 
