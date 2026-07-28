@@ -1,7 +1,8 @@
+from enum import StrEnum
 from typing import Set
 
 
-class States:
+class States(StrEnum):
     ANGRY = "ANGRY"
     FEAR = "FEAR"
     HAPPY = "HAPPY"
@@ -10,8 +11,6 @@ class States:
     SAD = "SAD"
     SURPRISE = "SURPRISE"
 
-    @staticmethod
-    def get_all_states() -> Set[str]:
-        return {"ANGRY", "FEAR", "HAPPY", "HATE", "OTHER", "SAD", "SURPRISE"}
-
-    
+    @classmethod
+    def get_all_states(cls) -> Set[str]:
+        return set(cls)
