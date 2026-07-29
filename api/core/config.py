@@ -16,6 +16,8 @@ class Config(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int
     ACCESS_TOKEN_EXPIRE_MINUTES: int
 
+    RATE_LIMITER_ENABLED: bool
+    RATE_LIMITER_PER_MINUTE: int
     model_config = SettingsConfigDict(env_file=env_file)
 
 
