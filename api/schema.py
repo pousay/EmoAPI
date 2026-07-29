@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from ._types import States
 
 
 class UserBase(BaseModel):
@@ -36,8 +37,8 @@ class TokenResponse(BaseModel):
 
 class Emo(BaseModel):
     text: str
-    state: Optional[str]
+    state: Optional[States]
 
 
 class EmoResponse(Emo):
-    state: str
+    state: States
