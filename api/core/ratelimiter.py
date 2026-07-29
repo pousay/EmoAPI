@@ -1,12 +1,12 @@
 from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_real_remote_address
+from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from core.config import config
 
 limiter = Limiter(
-    key_func=get_real_remote_address,
+    key_func=get_remote_address,
     default_limits=[f"{config.RATE_LIMITER_PER_MINUTE}/minute"],
     enabled=config.RATE_LIMITER_ENABLED,
 )

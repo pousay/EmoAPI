@@ -3,6 +3,7 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import config
 from routes import query_router, states_router, auth_router
+from core.ratelimiter import configure_limiter
 
 app = FastAPI()
 app.add_middleware(
@@ -12,6 +13,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+configure_limiter(app)
+
 
 app.include_router(query_router)
 app.include_router(states_router)
