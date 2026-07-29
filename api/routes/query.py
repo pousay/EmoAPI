@@ -2,7 +2,6 @@ from fastapi import APIRouter, Query, Request
 from core.model import Predict
 from schema import EmoResponse
 from core.ratelimiter import limiter
-from core.config import config
 
 router = APIRouter(tags=["EMO"])
 
