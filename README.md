@@ -207,7 +207,7 @@ cp .env.example .env
 # and model/classifier.joblib from datasets/train.csv
 
 # 6. run the API
-uvicorn api.main:app --reload --host 127.0.0.1 --port 8080
+python api/main.py
 ```
 
 Interactive API docs available at `http://127.0.0.1:8080/docs` once running (FastAPI's built-in Swagger UI).
