@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-from ._types import States
+from _types import States
 
 
 class UserBase(BaseModel):

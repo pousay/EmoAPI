@@ -18,6 +18,8 @@ class Config(BaseSettings):
 
     RATE_LIMITER_ENABLED: bool
     RATE_LIMITER_PER_MINUTE: int
+
+    ENABLE_AUTH: bool
     model_config = SettingsConfigDict(env_file=env_file)
 
 
