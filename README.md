@@ -230,13 +230,10 @@ Interactive API docs available at `http://127.0.0.1:8080/docs` once running (Fas
 
 ## Security Notes
 
-- **Never commit a real `.env` file to a public repo.** Add `.env` to `.gitignore` and commit only `.env.example` with placeholder values.
-- If a real `SECRET_KEY` was ever pushed to git history, treat it as compromised: rotate it (generate a new random key, e.g. `openssl rand -hex 32`) and invalidate existing tokens, since anyone with the old key could forge valid JWTs.
 - `ENABLE_AUTH=false` is convenient for local development but means `/text` and `/all_states` are fully open with no authentication — confirm this is intentional before deploying publicly.
 - CORS is currently configured with `allow_origins=["*"]` and no credentials — fine for a public, tokenless API, but revisit if cookie-based auth is ever introduced.
 
 ---
 
 ## License
-
-*(Add your chosen open-source license here — e.g. MIT.)*
+- [MIT LICENSE](./LICENSE)
