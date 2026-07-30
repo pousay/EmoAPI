@@ -98,7 +98,3 @@ def refresh(
     Crud.update_user_tokens(db, db_user.id, new_access_token, new_refresh_token)
 
     return {"access_token": new_access_token, "refresh_token": new_refresh_token}
-
-
-# TODO
-# make this auth to be optional

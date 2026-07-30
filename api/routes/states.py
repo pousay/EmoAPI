@@ -1,9 +1,9 @@
-from fastapi import APIRouter
-from schema import EmoResponse
+from fastapi import APIRouter, Depends
 from typing import Set
 from _types import States
+from core.dependencies import require_auth
 
-router = APIRouter(tags=["STATES"])
+router = APIRouter(tags=["STATES"], dependencies=[Depends(require_auth)])
 
 
 @router.get("/all_states", response_model=Set[str])

@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Query, Request, HTTPException
+from fastapi import APIRouter, Depends, Query, Request, HTTPException
 from core.model import Predict
+from core.dependencies import require_auth
 from schema import EmoResponse
 from core.ratelimiter import limiter
 
-router = APIRouter(tags=["EMO"])
+router = APIRouter(tags=["EMO"], dependencies=[Depends(require_auth)])
 
 
 @router.get("/text", response_model=EmoResponse)
