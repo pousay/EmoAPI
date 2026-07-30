@@ -62,3 +62,4 @@ uvloop==0.22.1
 watchfiles==1.2.0
 websockets==16.1.1
 wrapt==2.3.0
+pandas==3.0.5
