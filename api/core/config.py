@@ -20,6 +20,7 @@ class Config(BaseSettings):
     RATE_LIMITER_PER_MINUTE: int
 
     ENABLE_AUTH: bool
+    DEBUG: bool
     model_config = SettingsConfigDict(env_file=env_file)
 
 

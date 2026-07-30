@@ -9,7 +9,6 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -26,7 +25,7 @@ if config.ENABLE_AUTH:
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        reload=True,
+        reload=config.DEBUG,
         port=config.PORT,
         host=config.HOST,
     )
