@@ -7,7 +7,7 @@ services:
       - .env
     volumes:
       - ./model:/app/model:ro
-      - ./users.db:/app/users.db
+      - ./data:/app/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
