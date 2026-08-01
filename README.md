@@ -185,7 +185,20 @@ Requires a bearer token if `ENABLE_AUTH=true`.
 When `ENABLE_AUTH=false`, all endpoints (including `/text` and `/all_states`) are open, no token required.
 
 ## Setup & Running Locally
+> ### via docker
+```bash
+# 1. clone the repo
+git clone https://github.com/pousay/EmoAPI.git
+cd EmoAPI
 
+# 2. set up your environment file
+cp .env.example .env
+
+# 3. run
+docker compose up --build
+```
+
+> ### via venv
 ```bash
 # 1. clone the repo
 git clone https://github.com/pousay/EmoAPI.git
