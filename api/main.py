@@ -29,6 +29,3 @@ if __name__ == "__main__":
         port=config.PORT,
         host=config.HOST,
     )
-
-# TODO
-# Dockerfile
